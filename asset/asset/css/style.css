@@ -107,16 +107,6 @@ button:hover {
     background-color: #ba3720;
 }
 
-.toggle {
-    position: absolute;
-    right: 5px;
-    top: 23px;
-    cursor: pointer;
-    color: #007bff;
-    font-size: 14px;
-    user-select: none;
-  }
-
 input[type="text"],
 input[type="email"],
 input[type="password"],

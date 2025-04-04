@@ -11,6 +11,4 @@ function selectGender(gender) {
 
 function speakText(text) {
     responsiveVoice.speak(text, "UK English Male", {rate: 1.0});
-}   
-
-
+}
