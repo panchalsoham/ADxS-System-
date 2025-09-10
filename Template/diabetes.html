@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diabetes Risk Assessment - ADxS</title>
+    <link rel="stylesheet" href="../static/css/diabetes.css">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="pulse-heart">❤</div>
+            <h1>ADxS</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="login.html" class="login-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="diagnosis-container">
+        <div class="diagnosis-header">
+            <h1><i class="fas fa-tint"></i> Diabetes Risk Assessment</h1>
+            <p>Enter your health metrics for AI-powered diabetes risk analysis</p>
+        </div>
+        <div class="assessment-form glass-effect">
+            <div class="form-section">
+                <h2>Personal Information</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="number" id="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" required>
+                            <option value="">Select Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="weight">Weight (kg)</label>
+                        <input type="number" id="weight" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="height">Height (cm)</label>
+                        <input type="number" id="height" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Medical Parameters</h2>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="glucose">Fasting Blood Glucose (mg/dL)</label>
+                        <input type="number" id="glucose" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="bloodPressure">Blood Pressure (mm Hg)</label>
+                        <input type="number" id="bloodPressure" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="insulin">Insulin Level (mu U/ml)</label>
+                        <input type="number" id="insulin" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="skinThickness">Skin Thickness (mm)</label>
+                        <input type="number" id="skinThickness" required>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2>Risk Factors</h2>
+                <div class="risk-factors">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="familyHistory">
+                        <span class="checkmark"></span>
+                        Family history of diabetes
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="physicalActivity">
+                        <span class="checkmark"></span>
+                        Regular physical activity
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="healthyDiet">
+                        <span class="checkmark"></span>
+                        Balanced diet
+                    </label>
+                </div>
+            </div>
+
+            <button id="analyzeButton" class="analyze-btn">
+                <i class="fas fa-microscope"></i>
+                Analyze Risk
+            </button>
+        </div>
+
+        <div id="results" class="results-container glass-effect" style="display: none;">
+            <h2>Assessment Results</h2>
+            <div class="result-content">
+                <div class="risk-meter">
+                    <div class="meter-label">Risk Level</div>
+                    <div class="meter">
+                        <div id="riskIndicator" class="indicator"></div>
+                    </div>
+                </div>
+                <div id="resultDetails" class="result-details"></div>
+                <div class="recommendations">
+                    <h3>Recommendations</h3>
+                    <ul id="recommendationsList"></ul>
+                </div>
+            </div>
+            <button id="downloadPdfBtn" class="btn btn-success">Download Report</button>
+
+        </div>
+    </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="../static/js/diabetes.js"></script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+.recommendation-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.05);
+    transition: transform 0.3s ease;
+}
+
+.recommendation-item:hover {
+    transform: translateX(5px);
+}
+
+.recommendation-item i {
+    color: #ff69b4;
+    font-size: 1.2em;
+    padding-top: 3px;
+}
+
+.recommendation-content h5 {
+    margin: 0 0 5px 0;
+    color: #ff69b4;
+}
+
+.recommendation-content p {
+    margin: 0;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+
+.recommendation-item.high {
+    border-left: 4px solid #ff4444;
+}
+
+.recommendation-item.medium {
+    border-left: 4px solid #ffa500;
+}
+
+.recommendation-item.low {
+    border-left: 4px solid #4CAF50;
+}

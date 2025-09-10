@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Symptom Checker - HeartBeat</title>
+        <!-- Fix CSS paths -->
+        <link rel="stylesheet" href="../static/css/index.css">
+        <link rel="stylesheet" href="../static/css/symptom-checker.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    </head>
+    
+ 
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="pulse-heart">❤</div>
+            <h1>ADxS</h1>
+        </div>
+        <div class="emergency-contact">
+            <i class="fas fa-phone-alt emergency-icon"></i>
+            <div class="emergency-info">
+                <span>Emergency</span>
+                <a href="tel:8141002228<">+91-8141002228</a>
+            </div>
+            <div class="nav-links">
+            
+              <a href="symptom-checker.html">Symptom Checker</a>
+              <a href="login.html" class="login-btn">Login</a>
+          </div>
+    </nav>
+
+    <div class="symptom-checker-container">
+        <h1>AI Symptom Checker</h1>
+        <p class="subtitle">Get instant health insights powered by advanced AI</p>
+
+        <div class="checker-form">
+            <div class="basic-info glass-effect">
+                <h2><i class="fas fa-user"></i> Basic Information</h2>
+                <input type="number" id="age" placeholder="Age">
+                <select id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+
+            <div class="symptom-selection glass-effect">
+                <h2><i class="fas fa-notes-medical"></i> Select Your Symptoms</h2>
+                <div class="search-box">
+                    <input type="text" id="symptomSearch" placeholder="Type to search symptoms...">
+                    <div id="symptomSuggestions" class="suggestions"></div>
+                </div>
+                <div id="selectedSymptoms" class="selected-symptoms">
+                    <!-- Selected symptoms will appear here -->
+                </div>
+            </div>
+
+            <div class="additional-info glass-effect">
+                <h2><i class="fas fa-info-circle"></i> Additional Information</h2>
+                <textarea id="additionalInfo" placeholder="Please provide any additional information about your symptoms..."></textarea>
+            </div>
+
+            <button id="checkSymptoms" class="check-button">
+                <i class="fas fa-stethoscope"></i> Analyze Symptoms
+            </button>
+        </div>
+
+        <div id="results" class="results-container glass-effect" style="display: none;">
+            <h2><i class="fas fa-clipboard-check"></i> Analysis Results</h2>
+            <div id="resultContent"></div>
+        </div>
+    </div>
+
+       <!-- At the bottom of the file before </body> -->
+       <script src="../static/js/symptom-checker.js"></script>
+</body>
+</html>

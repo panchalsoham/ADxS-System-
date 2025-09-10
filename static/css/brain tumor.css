@@ -1,0 +1,289 @@
+:root {
+    --primary: #ff4b4b;
+    --secondary: #ff6b6b;
+    --accent: #ff8787;
+    --text: #333;
+    --bg: #fff5f5;
+    --success: #4CAF50;
+    --warning: #FFC107;
+    --danger: #f44336;
+}
+
+/* Base styles matching the main theme */
+body {
+    background: var(--bg);
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 1rem 5%;
+    
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    margin-left:-34px;
+    padding:20px;
+  
+    
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pulse-heart {
+    font-size: 2rem;
+    color: var(--primary);
+    animation: pulse 1.5s infinite;
+    margin-left:12px;
+}
+
+.nav-links a {
+    color: var(--text);
+    text-decoration: none;
+    margin-left: 2rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--primary);
+}
+
+.nav-links .login-btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    transition: background 0.3s;
+}
+
+.nav-links .login-btn:hover {
+    background: var(--secondary);
+}
+
+.diagnosis-container {
+    max-width: 1200px;
+    margin: 80px auto 2rem;
+    padding: 0 2rem;
+}
+
+.diagnosis-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.diagnosis-header h1 {
+    color: var(--text);
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.diagnosis-header i {
+    color: var(--primary);
+}
+
+/* Upload Section Styles */
+.upload-section {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.upload-box {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    border: 2px dashed var(--primary);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.upload-box:hover {
+    border-color: var(--secondary);
+    transform: translateY(-5px);
+}
+
+.upload-box i {
+    font-size: 4rem;
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.preview-box {
+    width: 100%;
+    max-width: 500px;
+    height: 300px;
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    background: white;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.preview-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.preview-controls {
+    position: absolute;
+    bottom: 1rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 0.5rem;
+    background: rgba(255,255,255,0.9);
+    padding: 0.5rem;
+    border-radius: 25px;
+}
+
+.control-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: var(--primary);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.control-btn:hover {
+    background: var(--secondary);
+}
+
+/* Analysis Section Styles */
+.analysis-section {
+    margin-bottom: 3rem;
+}
+
+.progress-bar {
+    height: 6px;
+    background: #eee;
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.progress {
+    height: 100%;
+    background: var(--primary);
+    width: 0;
+    transition: width 0.3s ease;
+}
+
+.analysis-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.step {
+    text-align: center;
+    color: #666;
+}
+
+.step.active {
+    color: var(--primary);
+}
+
+/* Results Section Styles */
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.result-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.detection-indicator {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.indicator-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: #ddd;
+}
+
+.indicator-circle.positive {
+    background: var(--danger);
+}
+
+.indicator-circle.negative {
+    background: var(--success);
+}
+
+.confidence-meter {
+    height: 20px;
+    background: #eee;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-top: 1rem;
+    position: relative;
+}
+
+.meter-fill {
+    height: 100%;
+    background: var(--primary);
+    width: 0;
+    transition: width 0.5s ease;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.primary-btn, .secondary-btn {
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
+}
+
+.primary-btn {
+    background: var(--primary);
+    color: white;
+}
+
+.secondary-btn {
+    background: #eee;
+    color: var(--text);
+}
+
+.primary-btn:hover {
+    background: var(--secondary);
+}
+
+.secondary-btn:hover {
+    background: #ddd;
+}

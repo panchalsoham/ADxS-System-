@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADxS</title>
+    <link rel="stylesheet" href="../static/css/brain tumor.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="pulse-heart">❤</div>
+            <h1>ADxs</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+           
+            <a href="login.html" class="login-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="diagnosis-container">
+        <div class="diagnosis-header">
+            <h1><i class="fas fa-brain"></i> Brain Tumor Detection</h1>
+            <p>Upload MRI scan for AI-powered analysis</p>
+        </div>
+
+        <div class="upload-section">
+            <div class="upload-box" id="uploadBox">
+                <input type="file" id="imageInput" accept="image/*" hidden>
+                <i class="fas fa-cloud-upload-alt"></i>
+                <h3>Drag & Drop or Click to Upload</h3>
+                <p>Supported formats: JPEG, PNG, DICOM</p>
+            </div>
+
+            <div class="preview-box" id="previewBox" style="display: none;">
+                <img id="previewImage" src="" alt="Preview">
+                <div class="preview-controls">
+                    <button class="control-btn" onclick="rotateImage()">
+                        <i class="fas fa-redo"></i>
+                    </button>
+                    <button class="control-btn" onclick="zoomImage(1.1)">
+                        <i class="fas fa-search-plus"></i>
+                    </button>
+                    <button class="control-btn" onclick="zoomImage(0.9)">
+                        <i class="fas fa-search-minus"></i>
+                    </button>
+                    <button class="control-btn" onclick="resetImage()">
+                        <i class="fas fa-sync"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="analysis-section" id="analysisSection" style="display: none;">
+            <div class="progress-bar">
+                <div class="progress" id="analysisProgress"></div>
+            </div>
+            <div class="analysis-steps">
+                <div class="step">
+                    <i class="fas fa-file-medical"></i>
+                    <span>Image Processing</span>
+                </div>
+                <div class="step">
+                    <i class="fas fa-brain"></i>
+                    <span>AI Analysis</span>
+                </div>
+                <div class="step">
+                    <i class="fas fa-chart-bar"></i>
+                    <span>Results</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="results-section" id="resultsSection" style="display: none;">
+            <h2>Diagnosis Results</h2>
+            <div class="results-grid">
+                <div class="result-card">
+                    <h3>Detection</h3>
+                    <div class="detection-indicator">
+                        <div class="indicator-circle"></div>
+                        <span id="detectionResult">Processing...</span>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Confidence Score</h3>
+                    <div class="confidence-meter">
+                        <div class="meter-fill" id="confidenceMeter"></div>
+                        <span id="confidenceScore">0%</span>
+                    </div>
+                </div>
+                <div class="result-card">
+                    <h3>Location</h3>
+                    <div id="tumorLocation">
+                        <img id="heatmapImage" src="" alt="Heatmap">
+                    </div>
+                </div>
+            </div>
+            <div class="action-buttons">
+                <button class="primary-btn" onclick="downloadReport()">
+                    <i class="fas fa-download"></i> Download Report
+                </button>
+                <button class="secondary-btn" onclick="startNewDiagnosis()">
+                    <i class="fas fa-redo"></i> New Diagnosis
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs"></script>
+    <script src="../static/js/brain tumore.js"></script>
+</body>
+</html>

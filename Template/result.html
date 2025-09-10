@@ -1,0 +1,21 @@
+<!-- templates/result.html -->
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Diagnosis Result</title>
+  <link rel="stylesheet" href="C:\ADS-2\static\css\index.css">
+</head>
+<body>
+  <div class="result-box">
+    <h2>Diagnosis Result</h2>
+    <p><strong>Disease:</strong> {{ disease }}</p>
+    <p><strong>Recommended Treatments:</strong></p>
+    <ul>
+      {% for item in treatments %}
+      <li>{{ item }}</li>
+      {% endfor %}
+    </ul>
+    <a href="/"><button class="btn-primary">Back to Home</button></a>
+  </div>
+</body>
+</html>

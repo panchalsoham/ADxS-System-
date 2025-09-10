@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated diagnosis system - ADxS</title>
+    <link rel="stylesheet" href="../static/css/login.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <div class="container">
+        <div class="login-box">
+            <div class="logo">
+                <div class="pulse-heart">❤</div>
+                <h1>ADxS</h1>
+            </div>
+
+            <form id="loginForm">
+                <div class="input-group">
+                    <input type="email" required>
+                    <label>Email</label>
+                    <span class="highlight"></span>
+                </div>
+
+                <div class="input-group">
+                    <input type="password" required>
+                    <label>Password</label>
+                    <span class="highlight"></span>
+                </div>
+
+                <div class="remember-forgot">
+                    <label class="remember">
+                         <span class="checkmark"></span>
+                        
+                    </label>
+
+                    <div class="register-link">
+                        Don't have an account? <a href="../Template/forgot password.html" onclick="openSignup(event)">Forgot Password?</a>
+                    </div>
+                   
+                </div>
+
+                <div class="terms-check">
+                    <label class="remember">
+                        <input type="checkbox" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="terms.html" class="terms-link">Terms & Conditions</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span>Login</span>
+                    <div class="btn-heart">❤</div>
+                </button>
+<!-- ... existing code ... -->
+<div class="register-link">
+    Don't have an account? <a href="../Template/sign.html" onclick="openSignup(event)">Sign Up</a>
+</div>
+<!-- ... existing code ... -->
+            </form>
+        </div>
+    </div>
+    <script src="../static/js/login.js"></script>
+</body>
+</html>

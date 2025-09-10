@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Breast Cancer Risk Assessment - ADxS</title>
+    <link rel="stylesheet" href="../static/css/breast-cancer.css">
+    <link rel="stylesheet" href= "../static/css/breast-cancer-recommendation.css">
+    <link rel="stylesheet" href="../static/css/personalize-recommendation.css">
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="pulse-heart">❤</div>
+            <h1>ADxS</h1>
+        </div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            
+            <a href="login.html" class="login-btn">Logout</a>
+        </div>
+    </nav>
+
+    <main class="assessment-container">
+        <div class="assessment-header">
+            <h1><i class="fas fa-ribbon"></i> Breast Cancer Risk Assessment</h1>
+            <p>Enter your health information for a comprehensive risk analysis</p>
+        </div>
+
+        <form id="riskAssessmentForm" class="assessment-form">
+            <div class="form-grid">
+                <div class="input-group">
+                    <label>Age</label>
+                    <input type="number" name="age" required min="18" max="120">
+                </div>
+
+                <div class="input-group">
+                    <label>First Menstrual Period Age</label>
+                    <input type="number" name="menstrualAge" required min="8" max="20">
+                </div>
+
+                <div class="input-group">
+                    <label>First Live Birth Age</label>
+                    <select name="firstBirth">
+                        <option value="">Select Option</option>
+                        <option value="no_births">No Births</option>
+                        <option value="before_20">Before 20</option>
+                        <option value="20_24">20-24</option>
+                        <option value="25_29">25-29</option>
+                        <option value="after_30">30 or older</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Family History</label>
+                    <select name="familyHistory" required>
+                        <option value="">Select Option</option>
+                        <option value="none">No History</option>
+                        <option value="first_degree">First-degree Relative</option>
+                        <option value="second_degree">Second-degree Relative</option>
+                        <option value="multiple">Multiple Relatives</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Previous Breast Biopsies</label>
+                    <select name="biopsies" required>
+                        <option value="">Select Option</option>
+                        <option value="none">None</option>
+                        <option value="one">One</option>
+                        <option value="multiple">Multiple</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Breast Density</label>
+                    <select name="breastDensity" required>
+                        <option value="">Select Option</option>
+                        <option value="fatty">Mostly Fatty</option>
+                        <option value="scattered">Scattered Density</option>
+                        <option value="heterogeneous">Heterogeneously Dense</option>
+                        <option value="dense">Extremely Dense</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Hormone Replacement Therapy</label>
+                    <select name="hormoneTherapy" required>
+                        <option value="">Select Option</option>
+                        <option value="never">Never Used</option>
+                        <option value="current">Current User</option>
+                        <option value="former">Former User</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Body Mass Index (BMI)</label>
+                    <input type="number" name="bmi" required step="0.1" min="15" max="50">
+                </div>
+            </div>
+
+            <button type="submit" class="analyze-btn">
+                <span>Calculate Risk</span>
+                <i class="fas fa-calculator"></i>
+            </button>
+        </form>
+
+        <!-- ... existing code ... -->
+
+<div class="results-section" id="resultsSection" style="display: none;">
+    <h2>Risk Assessment Results</h2>
+    
+    <div class="results-grid">
+        <div class="result-card">
+            <h3><i class="fas fa-chart-line"></i> 5-Year Risk</h3>
+            <div class="risk-meter">
+                <div class="meter-fill" id="fiveYearRisk"></div>
+                <span class="risk-percentage" id="fiveYearPercentage">0%</span>
+            </div>
+            <div class="risk-interpretation" id="fiveYearInterpretation"></div>
+        </div>
+
+        <div class="result-card">
+            <h3><i class="fas fa-hourglass-half"></i> Lifetime Risk</h3>
+            <div class="risk-meter">
+                <div class="meter-fill" id="lifetimeRisk"></div>
+                <span class="risk-percentage" id="lifetimePercentage">0%</span>
+            </div>
+            <div class="risk-interpretation" id="lifetimeInterpretation"></div>
+        </div>
+
+        <div class="result-card wide-card">
+            <h3><i class="fas fa-exclamation-triangle"></i> Risk Factors</h3>
+            <ul id="riskFactorsList" class="risk-factors-list"></ul>
+        </div>
+    </div>
+
+    <div class="recommendations-section">
+        <h3><i class="fas fa-clipboard-list"></i> Personalized Recommendations</h3>
+        <div class="recommendations-grid">
+            <div class="recommendation-card">
+                <h4><i class="fas fa-heartbeat"></i> Medical</h4>
+                <ul id="medicalRecommendations"></ul>
+            </div>
+            <div class="recommendation-card">
+                <h4><i class="fas fa-running"></i> Lifestyle</h4>
+                <ul id="lifestyleRecommendations"></ul>
+            </div>
+            <div class="recommendation-card">
+                <h4><i class="fas fa-shield-alt"></i> Prevention</h4>
+                <ul id="preventionRecommendations"></ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="action-buttons">
+        <button onclick="downloadPDF()" class="download-btn">
+            <i class="fas fa-download"></i> Download Report
+        </button>
+        <button onclick="newAssessment()" class="new-assessment-btn">
+            <i class="fas fa-redo"></i> New Assessment
+        </button>
+    </div>
+</div>
+</main>
+</body>
+<script src="../static/js/breast-cancer.js"></script>
+<script src="../static/js/breast-cancer-recommendation.js"></script>
+<!-- Add this before closing </body> tag -->
+<script src="../static/js/personalized_recommendations.js"></script>
+</html>
+<!-- ... rest of the existing code ... -->

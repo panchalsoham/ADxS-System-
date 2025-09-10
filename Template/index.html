@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ADxS - Medical Diagnosis</title>
+   
+        <!-- ... existing code ... -->
+        <link rel="stylesheet" href="../static/css/index.css">
+        <link rel="stylesheet" href="../static/css/chat-widgate.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+</head>git 
+<body>
+    <div class="background-animation">
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+        <div class="heart"></div>
+    </div>
+    
+
+    <nav class="navbar">
+        <div class="logo">
+            <div class="pulse-heart">❤</div>
+            <h1>ADxS</h1>
+        </div>
+        <div class="emergency-contact">
+          <i class="fas fa-phone-alt emergency-icon"></i>
+          <div class="emergency-info">
+              <span>Emergency</span>
+              <a href="tel:8141002228?text=I need emergency help from ADxS System">+91-8141002228</a>
+          </div>
+          <div class="nav-links">
+           
+            <a href="symptom-checker.html">Symptom Checker</a>
+            <a href="login.html" class="login-btn">Login</a>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <h1>Advanced Medical Diagnosis</h1>
+        <p>AI-powered diagnosis for better healthcare decisions</p> </div>
+    </header>
+
+<style>
+  .chat-container {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 350px;
+    height: 500px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    z-index: 9999;
+  }
+  .chat-header { background: #ff4d4d; color: #fff; padding: 10px; display:flex; justify-content:space-between; align-items:center; font-weight:bold; }
+  .close-chat { background:none; border:none; color:white; font-size:18px; cursor:pointer; }
+  .chat-body { flex:1; padding:10px; overflow-y:auto; }
+  .chat-footer { display:flex; gap:5px; padding:10px; border-top:1px solid #ddd; }
+  .chat-footer input { flex:1; padding:6px; }
+  .chat-footer button { background:#ff4d4d; color:#fff; border:none; padding:6px 12px; cursor:pointer; border-radius:5px; }
+  .chat-trigger { position:fixed; bottom:20px; right:20px; background:#ff4d4d; color:white; padding:10px 16px; border:none; border-radius:20px; cursor:pointer; z-index:10000; }
+  .ai-msg { color:#007bff; margin-bottom:8px; white-space:pre-line; }
+  .user-msg { color:#333; margin-bottom:8px; }
+  .option-btn { background:#ff4d4d; color:white; border:none; padding:5px 10px; margin:3px 3px 3px 0; border-radius:5px; cursor:pointer; }
+</style>
+
+<button id="chatTrigger" class="chat-trigger">💬 Chat with AI</button>
+
+<div id="chatContainer" class="chat-container">
+  <div class="chat-header">
+    AI Assistant
+    <button id="closeChat" class="close-chat">✖</button>
+  </div>
+  <div class="chat-body" id="chatBody"></div>
+  <div class="chat-footer">
+    <input type="text" id="chatInput" placeholder="Type your message...">
+    <button id="sendBtn">Send</button>
+  </div>
+</div>
+
+<script>
+const chatTrigger = document.getElementById("chatTrigger");
+const chatContainer = document.getElementById("chatContainer");
+const closeChat = document.getElementById("closeChat");
+const chatBody = document.getElementById("chatBody");
+const chatInput = document.getElementById("chatInput");
+const sendBtn = document.getElementById("sendBtn");
+
+// Comprehensive Disease Database
+const diseaseInfo = {
+  "Brain Tumor": { symptoms: "Headaches, nausea, vomiting, blurred vision, balance problems.", treatment: "Surgery, radiation, chemotherapy depending on type." },
+  "Heart Disease": { symptoms: "Chest pain, shortness of breath, fatigue, irregular heartbeat.", treatment: "Lifestyle changes, medications, angioplasty, or bypass surgery." },
+  "Diabetes": { symptoms: "Increased thirst, frequent urination, hunger, weight loss.", treatment: "Blood sugar monitoring, diet, exercise, medications, insulin therapy." },
+  "Hypertension": { symptoms: "Headache, dizziness, blurred vision, nosebleeds.", treatment: "Lifestyle modification, medications like ACE inhibitors or beta-blockers." },
+  "Asthma": { symptoms: "Shortness of breath, wheezing, coughing.", treatment: "Inhalers, medications, avoiding triggers." },
+  "Kidney Disease": { symptoms: "Fatigue, swelling in legs/ankles, changes in urination.", treatment: "Diet control, medications, dialysis or kidney transplant in advanced cases." },
+  "Cancer": { symptoms: "Unexplained weight loss, fatigue, lumps, persistent pain.", treatment: "Surgery, chemotherapy, radiation therapy, targeted therapy." },
+  "COVID-19": { symptoms: "Fever, cough, fatigue, loss of taste/smell.", treatment: "Rest, hydration, medications as prescribed, hospitalization if severe." },
+  "Flu": { symptoms: "Fever, chills, sore throat, body aches.", treatment: "Rest, hydration, antiviral medications if necessary." },
+  "Migraine": { symptoms: "Severe headache, nausea, sensitivity to light/sound.", treatment: "Pain relief medications, lifestyle modifications, trigger avoidance." }
+};
+
+// Open/Close Chat
+chatTrigger.addEventListener("click", () => { chatContainer.style.display = "flex"; startChat(); });
+closeChat.addEventListener("click", () => chatContainer.style.display = "none");
+
+// Append message
+function appendMessage(text, sender){
+  const p = document.createElement("p");
+  p.textContent = text;
+  p.className = sender === "ai" ? "ai-msg" : "user-msg";
+  chatBody.appendChild(p);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+// Show buttons/options
+function showOptions(options, callback){
+  options.forEach(opt => {
+    const btn = document.createElement("button");
+    btn.textContent = opt;
+    btn.className = "option-btn";
+    btn.onclick = () => callback(opt);
+    chatBody.appendChild(btn);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  });
+}
+
+// Start Chat
+function startChat(){
+  chatBody.innerHTML = '';
+  appendMessage("Hi! How can I help you today?\nSelect a disease or type your question:", "ai");
+  showOptions(Object.keys(diseaseInfo), diseaseSelected);
+}
+
+// Disease selected
+function diseaseSelected(disease){
+  appendMessage("You: " + disease, "user");
+  appendMessage(`Do you want treatment details for ${disease}?`, "ai");
+  showOptions(["Yes", "No"], answer => treatmentAnswer(disease, answer));
+}
+
+// Treatment answer
+function treatmentAnswer(disease, answer){
+  appendMessage("You: " + answer, "user");
+  if(answer === "Yes"){
+    const info = diseaseInfo[disease];
+    appendMessage(`Symptoms: ${info.symptoms}\nTreatment: ${info.treatment}\nFor more information, consult a doctor. This is only an AI recommendation.`, "ai");
+    appendMessage("You can ask about another disease or type your question.", "ai");
+    showOptions(Object.keys(diseaseInfo), diseaseSelected);
+  } else {
+    appendMessage("Okay! Stay healthy! For more information, consult your doctor.", "ai");
+    showOptions(["Thanks & See you soon"], () => appendMessage("AI: You Are Welcome! 😊", "ai"));
+  }
+}
+
+// Manual typing handling
+function sendMessage(){
+  const msg = chatInput.value.trim();
+  if(msg === "") return;
+  appendMessage("You: " + msg, "user");
+  chatInput.value = "";
+
+  setTimeout(() => {
+    const lower = msg.toLowerCase();
+    let found = false;
+    for(const disease in diseaseInfo){
+      if(lower.includes(disease.toLowerCase())){
+        appendMessage(`AI: You mentioned ${disease}. Do you want treatment details?`, "ai");
+        showOptions(["Yes", "No"], answer => treatmentAnswer(disease, answer));
+        found = true;
+        break;
+      }
+    }
+    if(!found){
+      appendMessage("AI: Hi! How can I help you today?\nPlease select a disease from the options or type your question.", "ai");
+      showOptions(Object.keys(diseaseInfo), diseaseSelected);
+    }
+  }, 500);
+}
+
+sendBtn.addEventListener("click", sendMessage);
+chatInput.addEventListener("keydown", e => { if(e.key === "Enter") sendMessage(); });
+
+</script>
+
+
+
+
+    <main>
+        <section class="diagnosis-cards">
+            <div class="card brain-tumor">
+                <div class="card-icon">
+                    <i class="fas fa-brain"></i>
+                </div>
+                <h3>Brain Tumor Detection</h3>
+                <p>Advanced AI analysis for early detection of brain tumors</p>
+                <div class="pulse-ring"></div>
+                <button class="diagnose-btn" onclick="window.location.href='brain tumor.html'">Start Diagnosis</button>
+               
+
+            </div>
+
+            <div class="card breast-cancer">
+                <div class="card-icon">
+                    <i class="fas fa-ribbon"></i>
+                </div>
+                <h3>Breast Cancer Screening</h3>
+                <p>Early detection through mammogram analysis</p>
+                <div class="pulse-ring"></div>
+                <button class="diagnose-btn" onclick="window.location.href='breast-cancer.html'">Start Diagnosis</button>
+            </div>
+
+            <div class="card diabetes">
+                <div class="card-icon">
+                    <i class="fas fa-tint"></i>
+                </div>
+                <h3>Diabetes Risk Assessment</h3>
+                <p>Comprehensive analysis of diabetes risk factors</p>
+                <div class="pulse-ring"></div>
+                <button class="diagnose-btn" onclick="window.location.href='diabetes.html'">Start Diagnosis</button>
+            </div>
+        </section>
+ 
+
+        <section class="features">
+            <h2>Why Choose Us</h2>
+            <div class="feature-grid">
+                <div class="feature">
+                    <i class="fas fa-robot"></i>
+                    <h3>AI-Powered</h3>
+                    <p>Advanced machine learning algorithms</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Secure</h3>
+                    <p>HIPAA compliant data protection</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-clock"></i>
+                    <h3>Fast Results</h3>
+                    <p>Quick and accurate diagnosis</p>
+                </div>
+                <div class="feature">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Expert Review</h3>
+                    <p>Verified by medical professionals</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    
+  
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Adxs</h3>
+                <p>Advanced medical diagnosis powered by AI</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <ul>
+                    <li><i class="fas fa-phone"></i> +1 234 567 890</li>
+                    <li><i class="fas fa-envelope"></i> info@Adxs.com</li>
+                    <li><i class="fas fa-map-marker-alt"></i> 123 Medical Center, India</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 Adxs. All rights reserved.</p>
+        </div>
+    </footer>
+   
+        <script src="chat-widget.js"></script> <!-- Widget JS -->
+ 
+</body>
+</html>
